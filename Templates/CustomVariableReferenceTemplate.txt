@@ -1,0 +1,12 @@
+using System;
+using UnityEngine; 
+
+namespace WaterKat.CustomVariables
+{
+	[CreateAssetMenu(menuName = "WKVariable/#ASSETSUBPATH##VARIABLENAME#Variable", order = #ASSETORDER#)] 
+	[Serializable] 
+	public class #VARIABLENAME#Variable : CustomVariable<#VARIABLETYPE#>{} 
+
+	[Serializable] 
+	public class #VARIABLENAME#Reference : CustomReference<#VARIABLETYPE#>{}
+}

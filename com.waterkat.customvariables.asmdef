@@ -1,0 +1,16 @@
+{
+    "name": "waterkat.customvariables",
+    "rootNamespace": "WaterKat.CustomVariables",
+    "references": [
+        "GUID:51190f07616c791429647fcb42ae70bc"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

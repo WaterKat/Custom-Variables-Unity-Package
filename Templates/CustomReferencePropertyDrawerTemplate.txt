@@ -1,0 +1,8 @@
+using System;
+using UnityEditor; 
+
+namespace WaterKat.CustomVariables
+{
+	[CustomPropertyDrawer(typeof(#VARIABLENAME#Reference))] 
+	public class #VARIABLENAME#ReferencePropertyDrawer : CustomReferencePropertyDrawer<#VARIABLENAME#Reference, #VARIABLENAME#Variable> { }
+}
