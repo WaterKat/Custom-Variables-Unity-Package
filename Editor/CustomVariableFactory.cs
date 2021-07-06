@@ -23,7 +23,7 @@ namespace WaterKat.CustomVariables
         };
 
         [SerializeField]
-        public List<string> nameList = new List<string>()
+         public List<string> nameList = new List<string>()
         {
             "String",
             "Char",
@@ -61,19 +61,27 @@ namespace WaterKat.CustomVariables
         [SerializeField]
         private string _savePath = "Assets/WaterKat/CustomVariables/";
 
+        private const string defaultStateJSON = "{\"typeList\":[\"System.String\",\"System.Char\",\"System.Boolean\",\"System.Double\",\"System.Single\",\"System.Int64\",\"System.Int32\"],\"nameList\":[\"String\",\"Char\",\"Bool\",\"Double\",\"Float\",\"Long\",\"Int\"],\"assetMenuList\":[\"\",\"Extra/\",\"\",\"Extra/\",\"\",\"Extra/\",\"\"],\"useExtendedList\":[false,false,false,false,false,false,false],\"_savePath\":\"Assets/WaterKat/CustomVariables/\",\"ResetSafeguard\":false}";
         private const string CustomVariableTemplatePath = "Packages/com.waterkat.customvariables/Templates/CustomVariableReferenceTemplate.txt";
         private const string CustomReferencePropertyDrawerPath = "Packages/com.waterkat.customvariables/Templates/CustomReferencePropertyDrawerTemplate.txt";
         private const string ExtendedCustomReferencePropertyDrawerPath = "Packages/com.waterkat.customvariables/Templates/ExtendedCustomReferencePropertyDrawerTemplate.txt";
 
         [SerializeField]
         private bool ResetSafeguard = false;
+        [SerializeField]
 
         protected void OnEnable()
         {
             string data = EditorPrefs.GetString("CustomVariableFactory", JsonUtility.ToJson(this, false));
             JsonUtility.FromJsonOverwrite(data, this);
+            JsonUtility.FromJsonOverwrite("{\"ResetSafeguard\":false}", this);
         }
         protected void OnDisable()
+        {
+            SaveJSONData();
+        }
+
+        private void SaveJSONData()
         {
             string data = JsonUtility.ToJson(this, false);
             EditorPrefs.SetString("CustomVariableFactory", data);
@@ -116,6 +124,7 @@ namespace WaterKat.CustomVariables
             {
                 ResetVariableNames(thisObject);
                 resetSafeguardProperty.boolValue = false;
+                return;
             };
             if (!ResetSafeguard)
             {
@@ -129,10 +138,10 @@ namespace WaterKat.CustomVariables
 
                 if (GUILayout.Button("X", GUILayout.MaxWidth(20)))
                 {
-                    typeList.RemoveAt(i);                   //NOT SERIALIZED FIX LATER
-                    nameList.RemoveAt(i);
-                    assetMenuList.RemoveAt(i);
-                    useExtendedList.RemoveAt(i);
+                    typeListProperty.DeleteArrayElementAtIndex(i);
+                    nameListProperty.DeleteArrayElementAtIndex(i);
+                    assetMenuListProperty.DeleteArrayElementAtIndex(i);
+                    useExtendedListProperty.DeleteArrayElementAtIndex(i);
                 }
 
                 EditorGUILayout.LabelField("Type: ", GUILayout.MaxWidth(50));
@@ -161,11 +170,13 @@ namespace WaterKat.CustomVariables
                 EditorGUILayout.EndHorizontal();
             }
             if (GUILayout.Button("Add Field"))
-            {                                               //NOT SERIALIZED FIX LATER
-                typeList.Insert(0, "");
-                nameList.Insert(0, "");
-                assetMenuList.Insert(0, "Custom/");
-                useExtendedList.Insert(0, false);
+            {
+                typeListProperty.InsertArrayElementAtIndex(0);
+                nameListProperty.InsertArrayElementAtIndex(0);
+                assetMenuListProperty.InsertArrayElementAtIndex(0);
+                assetMenuListProperty.GetArrayElementAtIndex(0).stringValue = "Custom/";
+                useExtendedListProperty.InsertArrayElementAtIndex(0);
+                useExtendedListProperty.GetArrayElementAtIndex(0).boolValue = false;
             }
 
             EditorGUILayout.Space();
@@ -233,49 +244,9 @@ namespace WaterKat.CustomVariables
 
         private void ResetVariableNames(SerializedObject serializedObject)
         {
-            typeList = new List<string>()
-            {
-                "System.String",
-                "System.Char",
-                "System.Boolean",
-                "System.Double",
-                "System.Single",
-                "System.Int64",
-                "System.Int32",
-            };
-
-            nameList = new List<string>()
-            {
-                "String",
-                "Char",
-                "Bool",
-                "Double",
-                "Float",
-                "Long",
-                "Int",
-            };
-
-            assetMenuList = new List<string>()
-            {
-                "",
-                "Extra/",
-                "",
-                "Extra/",
-                "",
-                "Extra/",
-                "",
-            };
-
-            useExtendedList = new List<bool>()
-            {
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-            };
+            EditorPrefs.DeleteKey("CustomVariableFactory");
+            JsonUtility.FromJsonOverwrite(defaultStateJSON, this);
+            SaveJSONData();
         }
 
         private void CreateVariableScript(string variableName, string typeName, string assetMenu)
