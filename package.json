@@ -7,6 +7,8 @@
   "dependencies": {
     "com.waterkat.uiassistants": "https://github.com/WaterKat/UI-Assistants-Unity-Package.git"
   },
+  "enableLockFile": true,
+  "resolutionStrategy": "highest",
   "type": "library",
   "author": 
   {
@@ -14,4 +16,5 @@
     "email": "waterkatgames@gmail.com",
     "url": "waterkatgames.com"
   }
+
 }
