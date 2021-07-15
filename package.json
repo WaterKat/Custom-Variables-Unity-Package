@@ -7,5 +7,11 @@
   "dependencies": {
     "com.waterkat.uiassistants": "https://github.com/WaterKat/UI-Assistants-Unity-Package.git"
   },
-  "type": "library"
+  "type": "library",
+  "author": 
+  {
+    "name": "Jacob Vallecillo",
+    "email": "waterkatgames@gmail.com",
+    "url": "waterkatgames.com"
+  }
 }
