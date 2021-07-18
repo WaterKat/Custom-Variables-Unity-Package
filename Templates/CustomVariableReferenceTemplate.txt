@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace WaterKat.CustomVariables
 {
-	[CreateAssetMenu(menuName = "WKVariable/#ASSETSUBPATH##VARIABLENAME#Variable", order = #ASSETORDER#)] 
+	[CreateAssetMenu(menuName = "WaterKat/#ASSETSUBPATH##VARIABLENAME#Variable", order = #ASSETORDER#)] 
 	[Serializable] 
 	public class #VARIABLENAME#Variable : CustomVariable<#VARIABLETYPE#>{} 
 
