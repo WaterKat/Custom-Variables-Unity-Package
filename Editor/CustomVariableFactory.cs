@@ -59,7 +59,7 @@ namespace WaterKat.CustomVariables
         };
 
         [SerializeField]
-        private string _savePath = "Assets/WaterKat/CustomVariables/";
+        private string savePath = "Assets/WaterKat/CustomVariables/";
 
         private const string defaultStateJSON = "{\"typeList\":[\"System.String\",\"System.Char\",\"System.Boolean\",\"System.Double\",\"System.Single\",\"System.Int64\",\"System.Int32\"],\"nameList\":[\"String\",\"Char\",\"Bool\",\"Double\",\"Float\",\"Long\",\"Int\"],\"assetMenuList\":[\"\",\"Extra/\",\"\",\"Extra/\",\"\",\"Extra/\",\"\"],\"useExtendedList\":[false,false,false,false,false,false,false],\"_savePath\":\"Assets/WaterKat/CustomVariables/\",\"ResetSafeguard\":false}";
         private const string CustomVariableTemplatePath = "Packages/com.waterkat.customvariables/Templates/CustomVariableReferenceTemplate.txt";
@@ -103,7 +103,7 @@ namespace WaterKat.CustomVariables
             SerializedProperty assetMenuListProperty = thisObject.FindProperty("assetMenuList");
             SerializedProperty useExtendedListProperty = thisObject.FindProperty("useExtendedList");
 
-            SerializedProperty savePathProperty = thisObject.FindProperty("_savePath");
+            SerializedProperty savePathProperty = thisObject.FindProperty("savePath");
             SerializedProperty resetSafeguardProperty = thisObject.FindProperty("ResetSafeguard");
 
             EditorGUILayout.LabelField("Custom Variable and Reference Factory", EditorStyles.boldLabel);
@@ -187,9 +187,9 @@ namespace WaterKat.CustomVariables
 
             EditorGUILayout.BeginHorizontal();
 
-            if (_savePath[_savePath.Length - 1] != '/') { _savePath += "/"; }
+            if (savePath[savePath.Length - 1] != '/') { savePath += "/"; }
 
-            if (AssetDatabase.IsValidFolder(_savePath))
+            if (AssetDatabase.IsValidFolder(savePath))
             {
                 EditorGUILayout.LabelField("Valid Directory");
             }
@@ -198,13 +198,13 @@ namespace WaterKat.CustomVariables
                 EditorGUILayout.LabelField("Directory is invalid");
                 if (GUILayout.Button("Create Directory"))
                 {
-                    CreateDirectory(_savePath);
+                    CreateDirectory(savePath);
                 }
             }
 
             EditorGUILayout.EndHorizontal();
 
-            if (AssetDatabase.IsValidFolder(_savePath))
+            if (AssetDatabase.IsValidFolder(savePath))
             {
                 if (GUILayout.Button("Create Classes"))
                 {
@@ -231,9 +231,10 @@ namespace WaterKat.CustomVariables
                         {
                             typeNameSub = typeList[i];
                         }
-
-                        CreateVariableScript(nameList[i], typeNameSub, assetMenuList[i]);
-                        CreatePropertyDrawerScript(nameList[i], typeNameSub, assetMenuList[i], useExtendedList[i] ? ExtendedCustomReferencePropertyDrawerPath : CustomReferencePropertyDrawerPath);
+                        string localDirectory = savePath + nameList[i] + "/";
+                        CreateDirectory(localDirectory);
+                        CreateVariableScript(localDirectory, nameList[i], typeNameSub, assetMenuList[i]);
+                        CreatePropertyDrawerScript(localDirectory, nameList[i], typeNameSub, assetMenuList[i], useExtendedList[i] ? ExtendedCustomReferencePropertyDrawerPath : CustomReferencePropertyDrawerPath);
                     }
                     AssetDatabase.Refresh();
                 }
@@ -249,7 +250,7 @@ namespace WaterKat.CustomVariables
             SaveJSONData();
         }
 
-        private void CreateVariableScript(string variableName, string typeName, string assetMenu)
+        private void CreateVariableScript(string _savePath,string variableName, string typeName, string assetMenu)
         {
             FileStream newScriptFilestream;
             if (!File.Exists(_savePath + variableName + "Variable.cs"))
@@ -283,7 +284,7 @@ namespace WaterKat.CustomVariables
             newScriptFilestream.Close();
         }
 
-        private void CreatePropertyDrawerScript(string variableName, string typeName, string assetMenu, string templatePath)
+        private void CreatePropertyDrawerScript(string _savePath, string variableName, string typeName, string assetMenu, string templatePath)
         {
             CreateDirectory(_savePath + "Editor/");
             FileStream newScriptFilestream;
