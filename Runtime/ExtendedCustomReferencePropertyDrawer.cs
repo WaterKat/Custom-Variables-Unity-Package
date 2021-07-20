@@ -47,7 +47,7 @@ namespace WaterKat.CustomVariables
                 if (variableProperty.objectReferenceValue != null)
                 {
                     SerializedObject serializedObject = new SerializedObject(variableProperty.objectReferenceValue);
-                    SerializedProperty valueProperty = serializedObject.FindProperty("Value");
+                    SerializedProperty valueProperty = serializedObject.FindProperty("value");
 
                     EditorGUI.PropertyField(WKGui.GetRect(), valueProperty, true);
                 }

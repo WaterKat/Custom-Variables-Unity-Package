@@ -6,7 +6,7 @@ namespace WaterKat.CustomVariables
     [Serializable]
     public abstract class CustomVariable<T> : ScriptableObject
     {
-        private T value;
+        [SerializeField] private T value;
         public T Value
         {
             get { return value; }
