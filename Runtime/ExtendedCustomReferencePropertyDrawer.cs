@@ -1,6 +1,6 @@
 using UnityEditor;
 using UnityEngine;
-using WaterKat.UIAssistants;
+using WaterKat;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 using System;

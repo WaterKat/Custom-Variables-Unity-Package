@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using WaterKat.UIAssistants;
+using WaterKat;
 
 namespace WaterKat.CustomVariables
 {

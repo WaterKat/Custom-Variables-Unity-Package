@@ -2,7 +2,7 @@
     "name": "waterkat.customvariables",
     "rootNamespace": "WaterKat.CustomVariables",
     "references": [
-        "GUID:51190f07616c791429647fcb42ae70bc"
+        "GUID:7fd4b516bc4dd934c92b4ad149d46f04"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
