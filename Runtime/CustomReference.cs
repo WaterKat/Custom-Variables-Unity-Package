@@ -9,10 +9,23 @@ namespace WaterKat.CustomVariables
         public T ConstantValue;
         public CustomVariable<T> Variable;
 
-
         public T Value
         {
-            get { return UseConstant ? ConstantValue : Variable.Value; }
+            get 
+            { 
+                return UseConstant ? ConstantValue : Variable.Value; 
+            }
+            set
+            {
+                if (UseConstant)
+                {
+                    ConstantValue = value;
+                }
+                else
+                {
+                    Variable.Value = value;
+                }
+            }
         }
     }
 }
