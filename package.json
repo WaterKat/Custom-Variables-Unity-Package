@@ -1,6 +1,6 @@
 {
   "name": "com.waterkat.customvariables",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "displayName": "WaterKat Custom Variables",
   "description": "This package allows you to create custom wrappers for variables in the form of scriptable objects, these can be refenced by objects in a scene for clean intercommunication",
   "unity": "2021.1",

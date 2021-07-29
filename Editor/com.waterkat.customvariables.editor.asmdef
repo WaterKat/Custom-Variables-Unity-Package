@@ -1,0 +1,19 @@
+{
+    "name": "waterkat.customvariables.editor",
+    "rootNamespace": "WaterKat.CustomVariables",
+    "references": [
+        "GUID:7fd4b516bc4dd934c92b4ad149d46f04",
+        "GUID:1d37b7c9855983b4da2b9bcad8933869"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
